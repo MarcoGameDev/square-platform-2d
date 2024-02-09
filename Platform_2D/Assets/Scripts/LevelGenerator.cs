@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class LevelGenerator : MonoBehaviour
 {
     private const int STARTING_LEVEL_PARTS = 5;
-    private const float PLAYER_DISTANCE_SPAWN_LVEL_PART = 200f;
+    private const float PLAYER_DISTANCE_SPAWN_LVEL_PART = 10f;
 
 
     public GameObject startingGround;
