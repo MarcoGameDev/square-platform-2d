@@ -36,13 +36,22 @@ public class LevelGenerator : MonoBehaviour
     private void SpawnLevelPart()
     {
         GameObject levelPart = levelPartList[Random.Range(0, levelPartList.Count)];
-        Transform lastLevelPart = SpawnLevelPart(levelPart, lastEndPosition);
-        lastEndPosition = lastLevelPart.Find("End").position;
+        GameObject lastLevelPart = SpawnLevelPart(levelPart, lastEndPosition);
+        lastEndPosition = lastLevelPart.transform.Find("End").position;
     }
 
-    public Transform SpawnLevelPart(GameObject levelPart, Vector3 position)
+    public GameObject SpawnLevelPart(GameObject levelPart, Vector3 position)
     {
-        Transform lastLevelPart = Instantiate(levelPart.transform, position, Quaternion.identity);
+        GameObject coloredLevelPart = SetRandomColorToLevelPart(levelPart);
+        GameObject lastLevelPart = Instantiate(coloredLevelPart, position, Quaternion.identity);
         return lastLevelPart;
+    }
+
+    private GameObject SetRandomColorToLevelPart(GameObject levelPart)
+    {
+        Transform ground = levelPart.transform.Find("Ground");
+        SpriteRenderer groundRenderer = ground.GetComponent<SpriteRenderer>();
+        groundRenderer.color = Random.ColorHSV();
+        return levelPart;
     }
 }
